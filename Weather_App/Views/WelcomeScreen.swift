@@ -6,10 +6,29 @@
 //
 
 import SwiftUI
+import CoreLocationUI
 
 struct WelcomeScreen: View {
+    @EnvironmentObject var locationManager : LocationManager
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            VStack{
+                Text("Welcome the Weather App")
+                    .bold().font(.title)
+                Text("Please Share Your Current Location To Get The Weather Area")
+                    .padding()
+            }
+            .multilineTextAlignment(.center)
+            .padding()
+            
+            LocationButton(.shareCurrentLocation){
+                locationManager.requestLocation()
+            }
+            .cornerRadius(30)
+            .symbolVariant(.fill)
+            .foregroundColor(.white)
+        }
+        .frame(maxWidth: .infinity,maxHeight: .infinity)
     }
 }
 
